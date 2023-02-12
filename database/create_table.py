@@ -13,7 +13,8 @@ cur.execute("""
         addr VARCHAR(50),
         phone VARCHAR(16),
         seats REAL,
-        genre char(15)
+        genre char(15),
+        img BLOB
     );
 """)
 cur.execute("""
