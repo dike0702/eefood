@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eeFood</title>
-</head>
-<body>
-    <p>Hello World</p>
-</body>
-</html>
+{% extends "main.html" %}
+{% load static %}
+
+{% block main %}
+<h1>eeFood - Find your best restaurant!</h1>
+
+{% if username == "daiki" %}
+<h2>Hello Owner</h2>
+{% elif username %}
+<h3>{{username}} welcome!</h3>
+{% else %}
+<h3>{{user}} welcome!</h3>
+{% endif %}
+<img src="{% static 'pictures/restaurant.jpeg' %}" />
+<button onclick="location.href='review'" >next</button>
+{% endblock %}
