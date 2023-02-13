@@ -1,7 +1,11 @@
 # Java App Project
 ## Evaluation app for restaurants "eeFood"
 #### Requirement
-**1. Build up the database**
+**django**
+pythonのフレームワーク
+
+
+**Build up the database**
 
 ・Restaurants{name(varchar), addr(varchar), phone(varchar16), time, number of table(int)}
 
