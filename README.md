@@ -4,6 +4,11 @@
 **django**
 pythonのフレームワーク
 
+download    "pip install django"
+
+cd application
+
+python manage.py runserver
 
 **Build up the database**
 
