@@ -1,5 +1,5 @@
 from django.db import models
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 class Category(models.Model):
     name = models.CharField(
@@ -55,3 +55,37 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Restaurants(models.Model, Importable):
+    name = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False,
+        primary_key=True
+    )
+    addr = models.CharField(
+        max_length=300,
+        blank=False,
+        null=False
+    )
+    table = models.PositiveSmallIntegerField(
+        blank=False,
+        null=False,
+    )
+    Genre = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False,
+    )
+    phone = PhoneNumberField(
+        blank=False,
+        null=False
+    )
+    img = models.ImageField(
+        blank=True,
+        upload_to='images/'
+    )
+
+
+    def __str__(self):
+        return self.name
