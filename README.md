@@ -24,3 +24,7 @@ python manage.py runserver
 
 ・Reservation{ResutaurantName, Table, UserName, ReservedTime} referenced from Restaurants(name, number of table)
 
+**phonenumber fileldのエラー**
+1. pip install django-phonenumber-field
+2. pip install django-phonenumbers
+
