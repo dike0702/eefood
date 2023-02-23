@@ -20,9 +20,9 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("application.urls")),
-    path('review/', include("application.urls")),
-    path('home/', include("application.urls")),
-    path('login/', include("application.urls")),
-    path('logout/', include("application.urls")),
-    path(r'^media/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+#     path('review/', include("application.urls")),
+#     path('home/', include("application.urls")),
+#     path('login/', include("application.urls")),
+#     path('logout/', include("application.urls")),
+#     path(r'^media/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 ]

@@ -1,30 +1,34 @@
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
+from django.shortcuts import render
+from django.views.generic import View
+from .models import Restaurants
+# from django.contrib.auth.views import LoginView, LogoutView
+# from django.contrib.auth.mixins import LoginRequiredMixin
 
-from . import forms
+# from . import forms
 
+class IndexView(View):
+    def get(self, request, *args, **kwargs):
+        restaurant_data = Restaurants.objects.all()
+        return render(request, 'application/index.html', {
+            'restaurant_data': restaurant_data
+        })
 
+    # def get_context_data(self):
+    #     ctxt = super().get_context_data()
+    #     ctxt["username"] = "daiki"
+    #     return ctxt
 
-class IndexView(TemplateView):
-    template_name = "index.html"
+# class Review(TemplateView):
+#     template_name = "review.html"
 
-    def get_context_data(self):
-        ctxt = super().get_context_data()
-        ctxt["username"] = "daiki"
-        return ctxt
+# # class HomeView(LoginRequiredMixin, TemplateView):
+# class HomeView(TemplateView):
+#     template_name = "home.html"
+#     # login_url = "/login"
 
-class Review(TemplateView):
-    template_name = "review.html"
+# class LoginView(LoginView):
+#     form_class = forms.LoginForm
+#     template_name = "login.html"
 
-# class HomeView(LoginRequiredMixin, TemplateView):
-class HomeView(TemplateView):
-    template_name = "home.html"
-    # login_url = "/login"
-
-class LoginView(LoginView):
-    form_class = forms.LoginForm
-    template_name = "login.html"
-
-class LogoutView(LoginRequiredMixin, LogoutView):
-    template_name = "login.html"
+# class LogoutView(LoginRequiredMixin, LogoutView):
+#     template_name = "login.html"
