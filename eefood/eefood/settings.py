@@ -127,8 +127,8 @@ STATIC_URL = 'static/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/login/"
+LOGIN_REDIRECT_URL = "/"    # ログインしたらトップ画面に遷移
+LOGOUT_REDIRECT_URL = "/accounts/logout/"   # ログアウトしたらトップ画面に遷移
 
 # 暗号化されたhttpsを使うようにする
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

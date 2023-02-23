@@ -3,20 +3,16 @@
 {% block content %}
 <div class="card card-profile my-5 mx-auto">
     <div class="card-body">
-        <h5 class="card-title text-center">Profile</h5>
+        <h2 class="card-title text-center">Profile</h2>
         <table class="profile_table mb-4">
             <tbody>
                 <tr>
-                    <th class="header">Name</th>
-                    <td class="data">*******</td>
+                    <th class="header">Name:</th>
+                    <td class="data">{{ user.username }}</td>
                 </tr>
                 <tr>
-                    <th class="header">Email</th>
-                    <td class="data">*******</td>
-                </tr>
-                <tr>
-                    <th class="header">Registrated date</th>
-                    <td class="data">*******</td>
+                    <th class="header">Email:</th>
+                    <td class="data">{{ user.email }}</td>
                 </tr>
             </tbody>
         </table>
