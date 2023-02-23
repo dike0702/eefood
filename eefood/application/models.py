@@ -86,6 +86,5 @@ class Restaurants(models.Model):
         upload_to='images/'
     )
 
-
     def __str__(self):
         return self.name

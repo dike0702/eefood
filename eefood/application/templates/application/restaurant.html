@@ -1,0 +1,27 @@
+{% extends 'application/base.html' %}
+
+{% block content %}
+<div class="my-5">
+    <div class="row restaurant">
+        <div class="col-md-6 mb-4 text-center">
+            <img src="{{ restaurant_data.img.url }}" alt="" class="imag-fluid">
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body px-2 py-1">
+                    <div class="p-4">
+                        <h3>{{ restaurant_data.name }}</h3>
+                        <p class="mb-3">{{ restaurant_data.Genre }}</p>
+                        <hr>
+                        <p>Phone: <span class="text-danger font-weight-bold">{{ restaurant_data.phone }}</span></p>
+                        <p>{{ restaurant_data.addr }}</p>
+                        <a href="" class="btn btn-primary">Make Reservation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

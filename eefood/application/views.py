@@ -13,10 +13,12 @@ class IndexView(View):
             'restaurant_data': restaurant_data
         })
 
-    # def get_context_data(self):
-    #     ctxt = super().get_context_data()
-    #     ctxt["username"] = "daiki"
-    #     return ctxt
+class ItemDetailView(View):
+    def get(self, request, *args, **kwargs):
+        restaurant_data = Restaurants.objects.get(name=self.kwargs['name'])
+        return render(request, 'application/restaurant.html', {
+            'restaurant_data': restaurant_data
+        })
 
 # class Review(TemplateView):
 #     template_name = "review.html"
