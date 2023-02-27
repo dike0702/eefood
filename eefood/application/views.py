@@ -20,17 +20,3 @@ class ItemDetailView(View):
             'restaurant_data': restaurant_data
         })
 
-# class Review(TemplateView):
-#     template_name = "review.html"
-
-# # class HomeView(LoginRequiredMixin, TemplateView):
-# class HomeView(TemplateView):
-#     template_name = "home.html"
-#     # login_url = "/login"
-
-# class LoginView(LoginView):
-#     form_class = forms.LoginForm
-#     template_name = "login.html"
-
-# class LogoutView(LoginRequiredMixin, LogoutView):
-#     template_name = "login.html"

@@ -28,3 +28,7 @@ python manage.py runserver
 1. pip install django-phonenumber-field
 2. pip install django-phonenumbers
 
+**テーブルの作るコマンド**
+1. python manage.py migrate
+2. python manage.py makemigrations applicatio
+
