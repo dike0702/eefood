@@ -5,3 +5,11 @@
 #         super().init(*args, **kwargs)
 #         for field in self.fields.values():
 #             field.widget.attrs["class"] = "form-control"
+
+from django import forms
+
+
+class ReviewForm(forms.form):
+    title = forms.CharField(max_length=255, label='Title')
+    comment = forms.CharField(label='Comment', widget=forms.textarea())
+    

@@ -22,6 +22,21 @@
             </div>
         </div>
     </div>
+    <div class="col-md-6 mb-4">
+        {% for review in review_data %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ review.title }}</h2>
+                    <p class="card-text">{{review.comment|truncatechars:100 }}</p>
+                    <div class="btn btn-warning">detail</div>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ review.created|date}} by {{ review.user }}
+                </div>
+                <a href="" class="stretched-link"></a>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

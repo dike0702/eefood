@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+from django.utils import timezone
+from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
 # class Category(models.Model):
@@ -88,3 +91,22 @@ class Restaurants(models.Model):
 
     def __str__(self):
         return self.name
+    
+SCORE_CHOICES = [
+    (1, '★'),
+    (2, '★★'),
+    (3, '★★★'),
+    (4, '★★★★'),
+    (5, '★★★★★'),
+]
+    
+class Review(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title =models.CharField("Title", max_length=255)
+    comment =models.TextField("Comment", max_length=255)
+    rate = models.IntegerField(verbose_name='レビュースコア', choices=SCORE_CHOICES, default='3')
+    created = models.DateTimeField("Date", default=timezone.now)
+        
+    def __str__(self):
+            return str(self.user)
+        
