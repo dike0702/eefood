@@ -3,7 +3,7 @@
 {% block content %}
 <div class="card card-profile my-5 mx-auto">
     <div class="card-body">
-        <h2 class="card-title text-center">Profile</h2>
+        <h2>Profile</h2>
         <table class="profile_table mb-4">
             <tbody>
                 <tr>
@@ -17,7 +17,7 @@
             </tbody>
         </table>
         <div class="button mx-auto">
-            <a href="" class= "btn btn-lg btn-warning btn-block">Modify</a>
+            <a href="{% url 'modification' %}" class= "btn btn-warning">Modify</a>
         </div>
     </div>
 </div>
