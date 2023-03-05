@@ -9,7 +9,7 @@
 from django import forms
 
 
-class ReviewForm(forms.form):
+class ReviewForm(forms.Form):
     title = forms.CharField(max_length=255, label='Title')
-    comment = forms.CharField(label='Comment', widget=forms.textarea())
+    comment = forms.CharField(label='Comment', widget=forms.Textarea())
     

@@ -50,3 +50,7 @@ main {
 .profile_table .data {
     padding: 16px 24px;
 }
+
+.formpost {
+    margin-bottom: 1rem;
+}

@@ -7,6 +7,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name ='top'),
+    path('review/<int:pk>', views.ReviewDetailView.as_view(), name ='review'),
+    path('review/new/', views.CreateReviewView.as_view(), name ='review_new'),
+    path('review/<int:pk>/edit/', views.ReviewEditView.as_view(), name='review_edit'),
+    path('review/<int:pk>/delete/', views.ReviewDeleteView.as_view(), name='review_delete'),
     #path('', views.ReviewView.as_view(), name ='top'),
     #path('', views.ReviewView.as_view(), name ='top'),
     path('restaurant/<name>', views.ItemDetailView.as_view(), name='restaurant'),

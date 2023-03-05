@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'application',
+    'widget_tweaks',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount'
 ]
 
 MIDDLEWARE = [
@@ -80,7 +85,7 @@ WSGI_APPLICATION = 'eefood.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -124,6 +129,8 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = 'static/'
 
+SITE_ID = 1
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_URL = "/login/"
@@ -138,3 +145,5 @@ LOGOUT_REDIRECT_URL = "/accounts/logout/"   # ログアウトしたらトップ�
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

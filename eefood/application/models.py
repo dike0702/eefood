@@ -101,7 +101,7 @@ SCORE_CHOICES = [
 ]
     
 class Review(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title =models.CharField("Title", max_length=255)
     comment =models.TextField("Comment", max_length=255)
     rate = models.IntegerField(verbose_name='レビュースコア', choices=SCORE_CHOICES, default='3')

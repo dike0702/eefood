@@ -31,9 +31,9 @@
                     <div class="btn btn-warning">detail</div>
                 </div>
                 <div class="card-footer text-muted">
-                    {{ review.created|date}} by {{ review.user }}
+                    {{ review.created|date}} by {{ review.author }}
                 </div>
-                <a href="" class="stretched-link"></a>
+                <a href="{% url 'review' review.id %}" class="stretched-link"></a>
             </div>
         {% endfor %}
     </div>

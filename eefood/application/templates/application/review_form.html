@@ -1,0 +1,21 @@
+{% extends "application/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="my-4">
+    <h2>Post</h2>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="formpost">
+        {% render_field form.title class="form-control" placeholder="Enter the tilte" %}
+    </div>
+    <div class="formpost">
+        {% render_field form.comment class="form-control" placeholder="Enter the comment" %}
+    </div>
+    <button class="btn btn-warning" type="submit">Done</button>
+</form>
+
+{% endblock %}
