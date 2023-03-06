@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import Restaurants, Review
-from .forms import ReviewForm
+from .forms import ReviewForm, PostRestaurantForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.contrib.auth.views import LoginView, LogoutView
-# from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import HttpResponseRedirect
+from django.urls import reverse_lazy
 
 # from . import forms
 
@@ -23,6 +23,31 @@ class ItemDetailView(View):
         return render(request, 'application/restaurant.html', {
             'restaurant_data': restaurant_data,
             'review_data': review_data
+        })
+
+class PostRestaurantView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        form = PostRestaurantForm(request.POST or None)
+        return render(request, 'application/postRestaurant.html',{
+            'form': form
+        })
+    
+    def post(self, request, *args, **kwargs):
+        form = PostRestaurantForm(request.POST or None)
+        
+        if form.is_valid():
+            restaurant_data = Restaurants()
+            restaurant_data.name = form.cleaned_data['name']
+            restaurant_data.addr = form.cleaned_data['adr']
+            restaurant_data.table = form.cleaned_data['table']
+            restaurant_data.Genre = form.cleaned_data['Genre']
+            restaurant_data.phone = form.cleaned_data['phone']
+            restaurant_data.img = form.cleaned_data['img']
+            restaurant_data.save()
+            return redirect('top', restaurant_data.id)
+        
+        return render(request, 'application/review_form.html',{
+            'form': form
         })
         
 class ReviewDetailView(View):

@@ -1,13 +1,11 @@
-# from django.contrib.auth.forms import AuthenticationForm
-
-# class LoginForm(AuthenticationForm):
-#     def init(self, *args, **kwargs):
-#         super().init(*args, **kwargs)
-#         for field in self.fields.values():
-#             field.widget.attrs["class"] = "form-control"
-
 from django import forms
+from django.forms import ModelForm
+from .models import Restaurants
 
+class PostRestaurantForm(ModelForm):
+    class Meta:
+        model = Restaurants
+        fields = "__all__"
 
 class ReviewForm(forms.Form):
     title = forms.CharField(max_length=255, label='Title')
