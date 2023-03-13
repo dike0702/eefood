@@ -26,6 +26,8 @@ class ItemDetailView(View):
         })
 
 class PostRestaurantView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+    
     def get(self, request, *args, **kwargs):
         form = PostRestaurantForm(request.POST or None)
         return render(request, 'application/postRestaurant.html',{
@@ -33,20 +35,22 @@ class PostRestaurantView(LoginRequiredMixin, View):
         })
     
     def post(self, request, *args, **kwargs):
-        form = PostRestaurantForm(request.POST or None)
+        # form = PostRestaurantForm(request.POST or None)
+        form = PostRestaurantForm(request.POST)
         
         if form.is_valid():
-            restaurant_data = Restaurants()
-            restaurant_data.name = form.cleaned_data['name']
-            restaurant_data.addr = form.cleaned_data['adr']
-            restaurant_data.table = form.cleaned_data['table']
-            restaurant_data.Genre = form.cleaned_data['Genre']
-            restaurant_data.phone = form.cleaned_data['phone']
-            restaurant_data.img = form.cleaned_data['img']
-            restaurant_data.save()
-            return redirect('top', restaurant_data.id)
+            # restaurant_data = Restaurants()
+            # restaurant_data.name = form.cleaned_data['name']
+            # restaurant_data.addr = form.cleaned_data['adr']
+            # restaurant_data.table = form.cleaned_data['table']
+            # restaurant_data.Genre = form.cleaned_data['Genre']
+            # restaurant_data.phone = form.cleaned_data['phone']
+            # restaurant_data.img = form.cleaned_data['img']
+            # restaurant_data.save()
+            form.save(commit=True)
+            # return redirect('top')
         
-        return render(request, 'application/review_form.html',{
+        return render(request, 'application/index.html',{
             'form': form
         })
         
