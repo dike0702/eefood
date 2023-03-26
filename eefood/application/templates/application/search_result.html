@@ -2,13 +2,6 @@
 
 {% block content %}
 <div class="text-center my-5">
-    <p>
-        <form method="GET" action="{% url 'top' %}">
-            {% csrf_token %}
-            {{ form.search_query }}
-            <button type="submit" class="btn btn-warning">Search</button>
-        </form>
-    </p>
     <div class="row">
         {% for restaurant in restaurant_data %}
             <div class="col-lg-3 col-md-6">
@@ -25,12 +18,6 @@
             </div>
         {% endfor %}
     </div>
-    <center>
-        <ul>
-          <a href="{% url 'post' %}">
-            <font color="#696969", size="5">Post a new restaurant</font>
-          </a>
-        </ul>
-    </center>
+</div>
 
 {% endblock %}

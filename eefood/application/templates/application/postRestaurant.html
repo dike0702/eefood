@@ -4,7 +4,7 @@
 <div class="card card-profile my-5 mx-auto">
     <div class="card-body">
         <h1>Post Restaurant</h1>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.non_field_errors }}
             {% for field in form %}

@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name ='top'),
     path('restaurant/<name>', views.ItemDetailView.as_view(), name='restaurant'),
     path('post/', views.PostRestaurantView.as_view(), name='post'),
+    path('reservation/<name>', views.ReservationView.as_view(), name='reservation'),
     path('review/<int:pk>', views.ReviewDetailView.as_view(), name ='review'),
     path('review/new/', views.CreateReviewView.as_view(), name ='review_new'),
     path('review/<int:pk>/edit/', views.ReviewEditView.as_view(), name='review_edit'),
