@@ -29,10 +29,13 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ review.title }}</h2>
                     <p class="card-text">{{review.comment|truncatechars:100 }}</p>
-                    <a href="{% url 'restaurant_review' pk=restaurant_data.pk %}" class="btn btn-warning">Read More</a>
                 </div>
                 <div class="card-footer text-muted">
                     {{ review.created|date }} by {{ review.author }}
+                    {% if review.author == user %}
+                        <a href="{% url 'review_edit' pk=review.pk %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'review_delete' review.pk %}" class="btn btn-danger">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         {% empty %}

@@ -7,7 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView, DeleteView
+from django.http import HttpResponseForbidden
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
@@ -142,3 +143,33 @@ class RestaurantDetailView(FormView):
     def get_success_url(self):
         restaurant = Restaurants.objects.get(name=self.kwargs['pk'])
         return reverse('restaurant_detail', kwargs={'pk': restaurant.pk})
+    
+class ReviewEditView(LoginRequiredMixin, UpdateView):
+    model = Review
+    fields = ['title', 'comment']
+    template_name = 'application/review_edit.html'
+    success_url = reverse_lazy('top')
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.author != self.request.user:
+            return HttpResponseForbidden()
+        return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.restaurant = self.object.restaurant
+        return super().form_valid(form)
+    
+class ReviewDeleteView(LoginRequiredMixin, DeleteView):
+    model = Review
+    template_name = 'application/review_delete.html'
+    success_url = reverse_lazy('top')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.author != request.user:
+            return HttpResponseForbidden()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)

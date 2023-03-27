@@ -1,7 +1,8 @@
 {% extends "application/base.html" %}
 
 {% block content %}
-<h2 class="my-4">{{ review_data.title }}</h2>
+<h2 class="my-4">{{ review.title }}</h2>
+<h2 class="my-4">{{ review.comment }}</h2>
 <hr>
 <h5 class="my-4">Are you sure, you want to delete?</h5>
 <form method="post">
