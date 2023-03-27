@@ -57,14 +57,14 @@ class PostRestaurantView(LoginRequiredMixin, View):
         })
     
     def post(self, request, *args, **kwargs):
-        # form = PostRestaurantForm(request.POST or None)
-        form = PostRestaurantForm(request.POST)
-        
-        if form.is_valid():
-            form.save(commit=True)
-            return redirect('top')
-        
-        return render(request, 'application/index.html',{
+        if request.method == 'POST':
+            form = PostRestaurantForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('top')
+        else:
+            form = PostRestaurantForm()
+        return render(request, 'index.html',{
             'form': form
         })
     
