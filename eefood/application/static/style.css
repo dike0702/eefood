@@ -54,3 +54,10 @@ main {
 .formpost {
     margin-bottom: 1rem;
 }
+
+/* reviewの枠の大きさ */
+.wide-card {
+    width: 100%;
+    max-width: 1500px !important;
+    margin: 0 auto;
+}

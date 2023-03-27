@@ -76,6 +76,7 @@ class Review(models.Model):
     title =models.CharField("Title", max_length=255)
     comment =models.TextField("Comment", max_length=255)
     rate = models.IntegerField(verbose_name='レビュースコア', choices=SCORE_CHOICES, default='3')
+    image = models.ImageField(upload_to='review_images', null=True, blank=True)
     created = models.DateTimeField("Date", default=timezone.now)
         
     def __str__(self):

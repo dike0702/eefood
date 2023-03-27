@@ -7,13 +7,17 @@
     <h2>Post</h2>
 </div>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="formpost">
         {% render_field form.title class="form-control" placeholder="Enter the tilte" %}
     </div>
     <div class="formpost">
         {% render_field form.comment class="form-control" placeholder="Enter the comment" %}
+    </div>
+    <div class="formpost">
+        {{ form.rate.label_tag }}
+        {% render_field form.rate class="form-control" %}
     </div>
     <button class="btn btn-warning" type="submit">Done</button>
 </form>

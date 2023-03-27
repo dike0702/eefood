@@ -22,7 +22,7 @@ class SearchForm(forms.Form):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['title', 'comment']
+        fields = ['title', 'comment', 'rate']
 
     def save(self, restaurant=None, author=None, commit=True):
         review = super().save(commit=False)
