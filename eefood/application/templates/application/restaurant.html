@@ -17,24 +17,26 @@
                         <p>Phone: <span class="text-danger font-weight-bold">{{ restaurant_data.phone }}</span></p>
                         <p>{{ restaurant_data.addr }}</p>
                         <a href="{% url 'reservation' restaurant_data.pk %}" class="btn btn-primary">Make Reservation</a>
+                        <a href="{% url 'restaurant_review' pk=restaurant_data.pk %}" class="btn btn-primary">Add Review</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-6 mb-4">
-        {% for review in review_data %}
+        {% for review in restaurant_data.reviews.all %}
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ review.title }}</h2>
                     <p class="card-text">{{review.comment|truncatechars:100 }}</p>
-                    <div class="btn btn-warning">detail</div>
+                    <a href="{% url 'restaurant_review' pk=restaurant_data.pk %}" class="btn btn-warning">Read More</a>
                 </div>
                 <div class="card-footer text-muted">
-                    {{ review.created|date}} by {{ review.author }}
+                    {{ review.created|date }} by {{ review.author }}
                 </div>
-                <a href="{% url 'review' review.id %}" class="stretched-link"></a>
             </div>
+        {% empty %}
+            <p>No reviews yet.</p>
         {% endfor %}
     </div>
 </div>

@@ -71,6 +71,7 @@ SCORE_CHOICES = [
 ]
     
 class Review(models.Model):
+    restaurant = models.ForeignKey(Restaurants, on_delete=models.CASCADE, related_name='reviews', null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title =models.CharField("Title", max_length=255)
     comment =models.TextField("Comment", max_length=255)
@@ -78,5 +79,5 @@ class Review(models.Model):
     created = models.DateTimeField("Date", default=timezone.now)
         
     def __str__(self):
-            return str(self.user)
+            return str(self.author)
         

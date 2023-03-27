@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Restaurants, Reservation
+from .models import Restaurants, Reservation, Review
 
 class PostRestaurantForm(ModelForm):
     class Meta:
@@ -19,7 +19,15 @@ class ReservationForm(ModelForm):
 class SearchForm(forms.Form):
     search_query = forms.CharField(max_length=100, required=False, label='')
 
-class ReviewForm(forms.Form):
-    title = forms.CharField(max_length=255, label='Title')
-    comment = forms.CharField(label='Comment', widget=forms.Textarea())
-    
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['title', 'comment']
+
+    def save(self, restaurant=None, author=None, commit=True):
+        review = super().save(commit=False)
+        review.restaurant = restaurant
+        review.author = author
+        if commit:
+            review.save()
+        return review
