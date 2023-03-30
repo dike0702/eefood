@@ -26,25 +26,28 @@
     {% if restaurant_data.reviews.count > 0 %}
     <div class="wide-card">
         <h2>Reviews:</h2>
-    <div class="col-md-6 mb-4">
-        {% for review in restaurant_data.reviews.all %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">{{ review.title }}</h2>
-                    <p class="card-text">{{review.comment|truncatechars:100 }}</p>
-                    <p class="card-text">{% for i in review.get_rate_display %}★{% endfor %}</p>
+        <div class="col-md-6 mb-4">
+            {% for review in restaurant_data.reviews.all %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ review.title }}</h2>
+                        <p class="card-text">{{ review.comment }}</p>
+                        <p class="star-rating">
+                            {% for i in review.get_rate_display %}★{% endfor %}
+                        </p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ review.created|date }} by {{ review.author }}
+                        {% if review.author == user %}
+                            <a href="{% url 'review_edit' pk=review.pk %}" class="btn btn-primary">Edit</a>
+                            <a href="{% url 'review_delete' review.pk %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="card-footer text-muted">
-                    {{ review.created|date }} by {{ review.author }}
-                    {% if review.author == user %}
-                        <a href="{% url 'review_edit' pk=review.pk %}" class="btn btn-primary">Edit</a>
-                        <a href="{% url 'review_delete' review.pk %}" class="btn btn-danger">Delete</a>
-                    {% endif %}
-                </div>
-            </div>
-        {% empty %}
-            <p>No reviews yet.</p>
-        {% endfor %}
+            {% empty %}
+                <p>No reviews yet.</p>
+            {% endfor %}
+        </div>
     </div>
     {% endif %}
 </div>

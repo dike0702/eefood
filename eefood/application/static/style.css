@@ -58,6 +58,12 @@ main {
 /* reviewの枠の大きさ */
 .wide-card {
     width: 100%;
-    max-width: 1500px !important;
+    max-width: 1500px;
     margin: 0 auto;
 }
+
+.star-rating {
+    color: #FFD700;
+  }
+  
+  

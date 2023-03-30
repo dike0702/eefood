@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Restaurants, Reservation, Review
+from django.core.validators import MaxLengthValidator
 
 class PostRestaurantForm(ModelForm):
     class Meta:
@@ -20,6 +21,7 @@ class SearchForm(forms.Form):
     search_query = forms.CharField(max_length=100, required=False, label='')
 
 class ReviewForm(forms.ModelForm):
+    comment = forms.CharField(widget=forms.Textarea(attrs={'rows': 5}), validators=[MaxLengthValidator(300)])
     class Meta:
         model = Review
         fields = ['title', 'comment', 'rate']

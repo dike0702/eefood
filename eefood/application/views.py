@@ -9,6 +9,7 @@ from django.urls import reverse_lazy, reverse
 from django.shortcuts import render
 from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.http import HttpResponseForbidden
+from django.db.models import Avg
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
@@ -41,11 +42,10 @@ class IndexView(View):
 class ItemDetailView(View):
     def get(self, request, *args, **kwargs):
         restaurant_data = Restaurants.objects.get(name=self.kwargs['name'])
-        #review_data = Review.objects.all()
         review_data = Review.objects.order_by('-id')
         return render(request, 'application/restaurant.html', {
             'restaurant_data': restaurant_data,
-            'review_data': review_data
+            'review_data': review_data,
         })
 
 class PostRestaurantView(LoginRequiredMixin, View):
@@ -114,8 +114,13 @@ class RestaurantReviewView(UserPassesTestMixin, View):
             review.save()
             messages.success(request, 'Your review has been submitted.')
             return redirect('restaurant_detail', pk=restaurant.name)
+        
+        else:
+            messages.error(request, 'There was an error submitting your review.')
         context = {'restaurant': restaurant, 'form': form}
         return render(request, 'application/review_form.html', context)
+        # context = {'restaurant': restaurant, 'form': form}
+        # return render(request, 'application/review_form.html', context)
     
     def test_func(self):
         return self.request.user.is_authenticated

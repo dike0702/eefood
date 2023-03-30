@@ -14,6 +14,9 @@
     </div>
     <div class="formpost">
         {% render_field form.comment class="form-control" placeholder="Enter the comment" %}
+        {% for error in form.comment.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
     </div>
     <div class="formpost">
         {{ form.rate.label_tag }}
