@@ -43,9 +43,18 @@ class ItemDetailView(View):
     def get(self, request, *args, **kwargs):
         restaurant_data = Restaurants.objects.get(name=self.kwargs['name'])
         review_data = Review.objects.order_by('-id')
+        avg_rate = Review.objects.filter(restaurant=restaurant_data).aggregate(avg_rate=Avg('rate'))
+        if avg_rate['avg_rate'] is not None:
+            avg_rate_round = round(avg_rate['avg_rate'], 1)
+            avg_rate_stars = int(avg_rate_round)
+        else:
+            avg_rate_round = None
+            avg_rate_stars = None
         return render(request, 'application/restaurant.html', {
             'restaurant_data': restaurant_data,
             'review_data': review_data,
+            'avg_rate_round': avg_rate_round,
+            'avg_rate_stars': avg_rate_stars
         })
 
 class PostRestaurantView(LoginRequiredMixin, View):
