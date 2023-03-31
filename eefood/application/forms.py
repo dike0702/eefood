@@ -11,10 +11,9 @@ class PostRestaurantForm(ModelForm):
 class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
-        fields = ['name', 'email', 'date', 'time', 'num_people']
+        fields = ['date', 'time', 'num_people']
         widgets = {
             'date': forms.TextInput(attrs={'type': 'date'}),
-            'time': forms.TextInput(attrs={'type': 'time'})
         }
 
 class SearchForm(forms.Form):

@@ -37,30 +37,44 @@ class Restaurants(models.Model):
     def __str__(self):
         return self.name
 
+TIME_SCHEDULE = [
+    (1, '10am'),
+    (2, '11am'),
+    (3, '12pm'),
+    (4, '1pm'),
+    (5, '2pm'),
+    (6, '3pm'),
+    (7, '5pm'),
+    (8, '6pm'),
+    (9, '7pm'),
+    (10, '8pm'),
+    (11, '9pm'),
+]
+
 class Reservation(models.Model):
     restaurant = models.ForeignKey(
         Restaurants, 
         on_delete=models.CASCADE
     )
-    name = models.CharField(
-        blank=False,
-        max_length=100
-    )
-    email = models.EmailField(
-        blank=False,
+    name = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE,
+        null=True
     )
     date = models.DateField(
         blank=False,
     )
-    time = models.TimeField(
-        blank=False,
+    time = models.IntegerField(
+        verbose_name='time', 
+        choices=TIME_SCHEDULE, 
+        default='1'
     )
     num_people = models.IntegerField(
         blank=False,
     )
 
     def __str__(self):
-        return self.name
+        return str(self.name)
     
 SCORE_CHOICES = [
     (1, '★'),

@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views import View
+from application.models import Reservation
 from django.http.response import HttpResponseRedirect
 from .forms import LoginForm, SignUpForm, UserChangeForm
 from django.contrib.auth import login

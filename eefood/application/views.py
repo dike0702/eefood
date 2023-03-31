@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
-from .models import Restaurants, Review
+from .models import Restaurants, Review, Reservation
 from django.contrib import messages
 from .forms import ReviewForm, PostRestaurantForm, ReservationForm, SearchForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -85,6 +85,7 @@ class ReservationView(View):
             if form.is_valid():
                 reservation = form.save(commit=False)
                 reservation.restaurant = restaurant_data
+                reservation.name = request.user
                 reservation.save()
                 return redirect('top')
         else:
@@ -94,6 +95,14 @@ class ReservationView(View):
             'form': form, 
             'restaurant': restaurant_data
         })
+
+class ReservationDetailView(View):
+    model = Reservation
+    template_name = 'reservation_detail.html'
+    context_object_name = 'reservations'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(name=self.request.user)
 
 class RestaurantReviewView(UserPassesTestMixin, View):
     def get(self, request, pk):
