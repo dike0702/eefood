@@ -3,6 +3,7 @@ from django.views import View
 from application.models import Reservation
 from django.http.response import HttpResponseRedirect
 from .forms import LoginForm, SignUpForm, UserChangeForm
+from application.models import Reservation
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -13,7 +14,11 @@ from django.urls import reverse_lazy
 
 class ProfileView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'accounts/profile.html')
+        user = request.user
+        reservation = Reservation.objects.filter(name=user)
+        return render(request, 'accounts/profile.html', {
+            'reservation': reservation,
+        })
 
 class Login(LoginView):
     template_name = 'registration/login.html'
