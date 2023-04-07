@@ -4,12 +4,13 @@ from application.models import Reservation
 from django.http.response import HttpResponseRedirect
 from .forms import LoginForm, SignUpForm, UserChangeForm
 from application.models import Reservation
+from application.forms import ReservationForm
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin   # ログインを強制させる
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 class ProfileView(View):
@@ -19,6 +20,23 @@ class ProfileView(View):
         return render(request, 'accounts/profile.html', {
             'reservation': reservation,
         })
+
+class ReservationDeleteView(DeleteView):
+    model = Reservation
+    template_name = 'application/reservation_delete.html'
+    success_url = reverse_lazy('top')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)
+    
+class ReservationUpdateView(UpdateView):
+    model = Reservation
+    form_class = ReservationForm
+    template_name = 'application/reservation_update.html'
+    success_url = reverse_lazy('top')
 
 class Login(LoginView):
     template_name = 'registration/login.html'

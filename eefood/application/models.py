@@ -73,8 +73,16 @@ class Reservation(models.Model):
         blank=False,
     )
 
+    # def __str__(self):
+    #     return str(self.name)
+    def get_time_display(self):
+        for time in TIME_SCHEDULE:
+            if time[0] == self.time:
+                return time[1]
+        return ''
+        
     def __str__(self):
-        return str(self.name)
+        return f'{self.name} at {self.restaurant} on {self.date} at {self.get_time_display()}'
     
 SCORE_CHOICES = [
     (1, '★'),

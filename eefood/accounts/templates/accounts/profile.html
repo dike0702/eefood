@@ -37,7 +37,7 @@
                     </tr>
                     <tr>
                         <th class="header">time:</th>
-                        <td class="data">{{ reservation.time }}</td>
+                        <td class="data">{{ reservation.get_time_display }}</td>
                     </tr>
                     <tr>
                         <th class="header">Number of people:</th>
@@ -47,8 +47,8 @@
                         <th class="header"></th>
                         <td class="data">
                             <div class="box" align="right">
-                                <a href="" class="btn btn-primary">Edit</a>
-                                <a href="" class="btn btn-danger">Delete</a>
+                                <a href="{% url 'reservation_update' reservation.pk %}" class="btn btn-primary">Rebook</a>
+                                <a href="{% url 'reservation_delete' reservation.pk %}" class="btn btn-danger">Cancel</a>
                             </div>
                         </td>
                     </tr>
