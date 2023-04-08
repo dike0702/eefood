@@ -2,7 +2,7 @@ from django.urls import path
 from accounts import views
 
 urlpatterns = [
-    path('profile/<username>', views.ProfileView.as_view(), name = 'profile'),
+    path('profile/', views.ProfileView.as_view(), name = 'profile'),
     path('reservation_delete/<int:pk>', views.ReservationDeleteView.as_view(), name='reservation_delete'),
     path('reservation_update/<int:pk>', views.ReservationUpdateView.as_view(), name='reservation_update'),
     path('login/', views.Login.as_view(), name = 'login'),

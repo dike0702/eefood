@@ -15,7 +15,7 @@ from django.urls import reverse_lazy
 
 class ProfileView(View):
     def get(self, request, *args, **kwargs):
-        user = request.user
+        user = self.request.user
         reservation = Reservation.objects.filter(name=user)
         return render(request, 'accounts/profile.html', {
             'reservation': reservation,
@@ -24,7 +24,7 @@ class ProfileView(View):
 class ReservationDeleteView(DeleteView):
     model = Reservation
     template_name = 'application/reservation_delete.html'
-    success_url = reverse_lazy('top')
+    success_url = reverse_lazy('profile')
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -36,7 +36,7 @@ class ReservationUpdateView(UpdateView):
     model = Reservation
     form_class = ReservationForm
     template_name = 'application/reservation_update.html'
-    success_url = reverse_lazy('top')
+    success_url = reverse_lazy('profile')
 
 class Login(LoginView):
     template_name = 'registration/login.html'

@@ -88,7 +88,7 @@ class ReservationView(View):
                 reservation.restaurant = restaurant_data
                 reservation.name = request.user
                 reservation.save()
-                return redirect('top')
+                return redirect('profile')
         else:
             form = PostRestaurantForm()
             restaurant_data = Restaurants.objects.get(name=self.kwargs['name'])
