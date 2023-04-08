@@ -16,8 +16,13 @@ class ReservationForm(ModelForm):
             'date': forms.TextInput(attrs={'type': 'date'}),
         }
 
-class SearchForm(forms.Form):
-    search_query = forms.CharField(max_length=100, required=False, label='')
+class RestaurantSearchForm(forms.Form):
+    name = forms.CharField(required=False)
+    genre = forms.CharField(required=False)
+
+    class Meta:
+        model = Restaurants
+        fields = ('name', 'genre')
 
 class ReviewForm(forms.ModelForm):
     comment = forms.CharField(widget=forms.Textarea(attrs={'rows': 5}), validators=[MaxLengthValidator(300)])

@@ -1,43 +1,35 @@
 from django.shortcuts import render, redirect
-from django.views.generic import View
+from django.views.generic import View, ListView
 from .models import Restaurants, Review, Reservation
 from django.contrib import messages
-from .forms import ReviewForm, PostRestaurantForm, ReservationForm, SearchForm
+from .forms import ReviewForm, PostRestaurantForm, ReservationForm, RestaurantSearchForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render
 from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.http import HttpResponseForbidden
-from django.db.models import Avg
+from django.db.models import Avg, Q
 
-class IndexView(View):
-    def get(self, request, *args, **kwargs):
-        restaurant_data = Restaurants.objects.all()
-        form = SearchForm(request.GET or None)
-        return render(request, 'application/index.html', {
-            'form': form,
-            'restaurant_data': restaurant_data
-        })
-    
-    def search(self, request, *args, **kwargs):
-        if request.method == 'GET':
-            form = SearchForm(request.GET)
-            restaurant_data = Restaurants.objects.all()
-            if form.is_valid() and form.cleaned_data['search_query']:
-                search_query = form.cleaned_data['search_query']
-                restaurant_data = restaurant_data.filter(name__icontains=search_query)
-            return render(request, 'application/search_result.html', {
-                'form': form,
-                'restaurant_data': restaurant_data
-            })
+class IndexView(ListView):
+    template_name = 'application/index.html'
+    context_object_name = 'restaurant_data'
+    paginate_by = 10
+
+    def get_queryset(self):
+        query_name = self.request.GET.get('name')
+        query_genre = self.request.GET.get('genre')
+
+        if query_name and query_genre:
+            qs = Restaurants.objects.filter(name__icontains=query_name, Genre__icontains=query_genre)
+        elif query_name:
+            qs = Restaurants.objects.filter(name__icontains=query_name)
+        elif query_genre:
+            qs = Restaurants.objects.filter(Genre__icontains=query_genre)
         else:
-            form = SearchForm()
-            restaurant_data = Restaurants.objects.all()
-        return render(request, 'reservation_create.html', {
-            'form': form, 
-            'restauant_data': restaurant_data
-        })
+            qs = Restaurants.objects.all()
+
+        return qs
 
 class ItemDetailView(View):
     def get(self, request, *args, **kwargs):
