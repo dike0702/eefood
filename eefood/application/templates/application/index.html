@@ -24,6 +24,7 @@
 
         <div class="text-center my-5">
             <div class="row">
+            {% if restaurant_data %}
                 {% for restaurant in restaurant_data %}
                     <div class="col-lg-3 col-md-6">
                         <div class="card img-thumbnail itemlist mb-3">
@@ -31,13 +32,14 @@
                             <div class="card-body text-center px-2 py-3">
                                 <p class="mb-0 text-secondary">{{ restaurant.Genre }}</p>
                                 <h5 class="font-weight-bold">{{ restaurant.name }}</h5>
-                                <!-- <h8 class="font-weight-bold">{{ restaurant.addr }}</h4>
-                                <h8 class="font-weight-bold">{{ restaurant.phone }}</h8> -->
                                 <a href="{% url 'restaurant' restaurant.name %}" class="stretched-link"></a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
+            {% else %}
+                <h4>No restaurants found</h4>
+            {% endif %}
             </div>
             <center>
                 <ul>
