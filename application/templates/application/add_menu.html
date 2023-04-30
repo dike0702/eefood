@@ -1,0 +1,24 @@
+{% extends "application/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="my-4">
+    <h2>Add Menu</h2>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="formpost">
+        {% render_field form.name class="form-control" placeholder="Enter the name" %}
+    </div>
+    <div class="formpost">
+        {% render_field form.price class="form-control" placeholder="Enter the price" %}
+    </div>
+    <div class="formpost">
+        {% render_field form.image class="form-control" %}
+    </div>
+    <button class="btn btn-warning" type="submit">Done</button>
+</form>
+
+{% endblock %}

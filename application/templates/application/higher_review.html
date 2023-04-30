@@ -1,0 +1,51 @@
+{% extends 'application/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card card-profile my-5">
+          <div class="card-body">
+            <h2 class="text-center">Higher Reviewed Restaurants</h2>
+            {% if restaurants %}
+              {% for restaurant in restaurants %}
+                <div class="restaurant-card">
+                  <h3 class="header text-center">{{ restaurant.name }}</h3>
+                  <table class="table table-bordered">
+                    <tr>
+                      <th class="header">Address:</th>
+                      <td class="data">{{ restaurant.addr }}</td>
+                    </tr>
+                    <tr>
+                      <th class="header">Genre:</th>
+                      <td class="data">{{ restaurant.Genre }}</td>
+                    </tr>
+                    <tr>
+                      <th class="header">Phone:</th>
+                      <td class="data">{{ restaurant.phone }}</td>
+                    </tr>
+                    <tr>
+                      <th class="header">Average review rate:</th>
+                      <td class="data">{{ restaurant.avg_rate }}</td>
+                    </tr>
+                  </table>
+                  <div class="text-center">
+                    <div>
+                      <img src="{{ restaurant.img.url }}" class="restaurant-img" alt="{{ restaurant.name }}">
+                    </div>
+                    <div>
+                      <a href="{% url 'restaurant_detail' restaurant.pk %}" class="btn btn-primary">View Details</a>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p>No restaurants found.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

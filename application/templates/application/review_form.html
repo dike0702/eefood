@@ -1,0 +1,31 @@
+{% extends "application/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="my-4">
+    <h2>Add Review</h2>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="formpost">
+        {% render_field form.title class="form-control" placeholder="Enter the tilte" %}
+    </div>
+    <div class="formpost">
+        {% render_field form.comment class="form-control" placeholder="Enter the comment" %}
+        {% for error in form.comment.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="formpost">
+        {{ form.rate.label_tag }}
+        {% render_field form.rate class="form-control" %}
+    </div>
+    <div class="formpost">
+        {% render_field form.image class="form-control" %}
+    </div>
+    <button class="btn btn-warning" type="submit">Done</button>
+</form>
+
+{% endblock %}
