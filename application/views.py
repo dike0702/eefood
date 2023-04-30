@@ -172,7 +172,7 @@ class RestaurantDetailView(FormView):
     
 class ReviewEditView(LoginRequiredMixin, UpdateView):
     model = Review
-    fields = ['title', 'comment', 'rate']
+    fields = ['title', 'comment', 'rate', 'image']
     template_name = 'application/review_edit.html'
     success_url = reverse_lazy('top')
 

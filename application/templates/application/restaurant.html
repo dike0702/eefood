@@ -109,7 +109,16 @@
           <p class="mb-3">{{ restaurant_data.Genre }}</p>
           <p class="mb-3">Phone: <span class="text-danger font-weight-bold">{{ restaurant_data.phone }}</span></p>
           <p class="mb-3">{{ restaurant_data.addr }}</p>
-          <hr>                    
+          <p>{{ restaurant_data.addr }}</p>
+            <p><strong>Business Hours:</strong></p>
+            <li>Monday: {{ restaurant_data.monday_hours }}</li>
+            <li>Tuesday: {{ restaurant_data.tuesday_hours }}</li>
+            <li>Wednesday: {{ restaurant_data.wednesday_hours }}</li>
+            <li>Thursday: {{ restaurant_data.thursday_hours }}</li>
+            <li>Friday: {{ restaurant_data.friday_hours }}</li>
+            <li>Saturday: {{ restaurant_data.saturday_hours }}</li>
+            <li>Sunday: {{ restaurant_data.sunday_hours }}</li>  
+          <hr>                                       
           <a href="{% url 'reservation' restaurant_data.pk %}" class="btn btn-primary">Make Reservation</a>
           <a href="{% url 'restaurant_review' pk=restaurant_data.pk %}" class="btn btn-primary">Add Review</a>
           <a href="{% url 'add_menu' pk=restaurant_data.pk %}" class="btn btn-primary">Add Menu</a>
