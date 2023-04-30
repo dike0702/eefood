@@ -203,6 +203,7 @@ class ReviewDeleteView(LoginRequiredMixin, DeleteView):
 class HigherReviewListView(ListView):
     template_name = 'application/higher_review.html'
     context_object_name = 'restaurants'
+    paginate_by = None
 
     def get_queryset(self):
         qs = Restaurants.objects.annotate(avg_score=Avg('reviews__rate')).filter(avg_score__gte=4.0)
