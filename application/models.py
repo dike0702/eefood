@@ -47,17 +47,16 @@ class Restaurants(models.Model):
         return self.name
 
 TIME_SCHEDULE = [
-    (1, '10am'),
-    (2, '11am'),
-    (3, '12pm'),
-    (4, '1pm'),
-    (5, '2pm'),
-    (6, '3pm'),
-    (7, '5pm'),
-    (8, '6pm'),
-    (9, '7pm'),
-    (10, '8pm'),
-    (11, '9pm'),
+    (1, '11am'),
+    (2, '12pm'),
+    (3, '1pm'),
+    (4, '2pm'),
+    (5, '3pm'),
+    (6, '5pm'),
+    (7, '6pm'),
+    (8, '7pm'),
+    (9, '8pm'),
+    (10, '9pm'),
 ]
 
 class Reservation(models.Model):
